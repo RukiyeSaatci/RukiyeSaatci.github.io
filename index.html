@@ -3,98 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Rukiye SAATCI</title>
+    <title>SAATCI Rukiye | Cyber Security Command Center</title>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&family=Fira+Code&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicon/devicon@latest/devicon.min.css">
 
     <style>
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow: hidden; }
-        .font-code { font-family: 'Fira Code', monospace; }
-        
-        /* Grille de fond animée */
-        #canvas-bg { position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.4; }
-
-        /* Effet de texte qui brille au survol */
-        .name-hover:hover {
-            color: #0070f3;
-            text-shadow: 0 0 20px rgba(0, 112, 243, 0.6);
-            transition: 0.4s;
+        :root {
+            --cyber-blue: #00f2fe; /* Turquoise vif */
+            --electric-blue: #4facfe; /* Bleu électrique */
+            --magenta: #ff00ff; /* Pour les touches de contraste néon */
+            --bg-dark: #020204; /* Noir presque pur */
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.08);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        
+        body, html {
+            background-color: var(--bg-dark);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            overflow: hidden; /* Garde le dashboard fixe */
+        }
+
+        /* 1. L'ANIMATION DE FOND 3D (Vanta Vortex) */
+        #vanta-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        /* GESTION DES CALQUES */
+        .ui-layer {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: grid;
+            grid-template-rows: 80px 1fr 50px;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* STYLE "GLASSMORPHISM" POUR TOUS LES PANNEAUX */
+        .panel {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .panel:hover {
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+        }
+
+        /* BARRE SUPÉRIEURE (HEADER) */
+        header {
+            grid-row: 1;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .logo-rs { font-weight: 900; letter-spacing: 2px; font-size: 1.2rem; color: #fff; }
+        .logo-rs span { color: var(--cyber-blue); text-shadow: 0 0 10px var(--cyber-blue); }
+        .status-bar { font-family: 'Fira Code', monospace; color: var(--text-muted); font-size: 0.75rem; }
+        .status-bar span { color: var(--cyber-blue); animation: blink 1s infinite; }
+
+        /* ZONE CENTRALE */
+        .main-content {
+            grid-row: 2;
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            gap: 20px;
+        }
+
+        /* NAVIGATION GAUCHE */
+        nav { display: flex; flex-direction: column; gap: 10px; }
+        .nav-link {
+            text-decoration: none; color: #aaa; font-family: 'Fira Code', monospace;
+            font-size: 0.85rem; padding: 12px; border-radius: 4px; transition: 0.3s;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-link:hover { background: rgba(0, 242, 254, 0.05); color: #fff; border-left: 2px solid var(--cyber-blue); }
+
+        /* CENTRE (NOM ET AMBITION) */
+        .hero { display: flex; flex-direction: column; justify-content: center; padding-left: 40px; }
+        .hero h1 { font-size: 4.5rem; font-weight: 900; letter-spacing: -3px; line-height: 0.9; margin-bottom: 15px; }
+        .hero h1 span { color: var(--electric-blue); text-shadow: 0 0 20px rgba(79, 172, 254, 0.5); }
+        .hero p { color: #aaa; font-size: 1.1rem; max-width: 500px; border-left: 2px solid var(--magenta); padding-left: 15px; }
+
+        /* PANNEAU DROITE (COMPÉTENCES AVEC LOGOS) */
+        .skills-panel { display: flex; flex-direction: column; gap: 20px; }
+        h2 { font-size: 0.8rem; color: var(--cyber-blue); text-transform: uppercase; letter-spacing: 2px; font-family: 'Fira Code', monospace; margin-bottom: 15px; }
+        
+        .skill-item { display: flex; align-items: center; gap: 15px; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 4px; }
+        .skill-item i { font-size: 1.8rem; color: #fff; transition: 0.3s; }
+        .skill-item:hover i { color: var(--cyber-blue); transform: scale(1.1); }
+        .skill-name { font-size: 0.9rem; color: #ccc; }
+        .skill-desc { font-size: 0.7rem; color: #666; font-family: 'Fira Code', monospace; }
+
+        /* BARRE INFÉRIEURE (FOOTER) */
+        footer { grid-row: 3; text-align: center; color: #222; font-family: monospace; font-size: 0.7rem; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; }
+
+        /* ANIMATIONS */
+        @keyframes blink { 50% { opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <canvas id="canvas-bg"></canvas>
+    <div id="vanta-bg"></div>
 
-    <nav class="fixed top-12 right-16 z-50 flex gap-8 font-code text-xs tracking-widest text-gray-500">
-        <a href="#" class="hover:text-white transition">// PROFIL</a>
-        <a href="#" class="hover:text-white transition">// PARCOURS</a>
-        <a href="#" class="hover:text-white transition">// CONTACT</a>
-    </nav>
-
-    <main class="relative z-10 h-screen flex flex-col justify-center pl-[12%]">
-        <h1 class="hero-name text-[7rem] font-black leading-[0.85] tracking-[-0.05em] mb-6">
-            Rukiye<br><span class="uppercase name-hover">SAATCI</span>
-        </h1>
+    <div class="ui-layer">
         
-        <div class="font-code text-lg text-gray-500 flex items-center gap-3 mb-10">
-            <span>Ambition :</span>
-            <span id="typewriter" class="text-[#0070f3] border-r-2 border-[#0070f3] pr-1"></span>
-        </div>
+        <header class="panel">
+            <div class="logo-rs">R.<span>SAATCI</span></div>
+            <div class="status-bar">>_ MODE: <span>OPÉRATIONNEL</span> // SÉCURITÉ: MAX</div>
+        </header>
 
-        <div class="flex gap-4">
-            <div class="px-4 py-2 bg-white/5 border border-white/10 rounded text-[10px] font-code text-gray-600 uppercase tracking-widest hover:border-[#0070f3] hover:text-[#0070f3] transition duration-500">BTS SIO SISR</div>
-            <div class="px-4 py-2 bg-white/5 border border-white/10 rounded text-[10px] font-code text-gray-600 uppercase tracking-widest hover:border-[#0070f3] hover:text-[#0070f3] transition duration-500">CISCO RÉSEAUX</div>
-            <div class="px-4 py-2 bg-white/5 border border-white/10 rounded text-[10px] font-code text-gray-600 uppercase tracking-widest hover:border-[#0070f3] hover:text-[#0070f3] transition duration-500">CYBERSÉCURITÉ</div>
-        </div>
-    </main>
+        <main class="main-content">
+            <nav class="panel">
+                <h2>Terminal</h2>
+                <a href="#" class="nav-link">>_ [01] PRÉSENTATION</a>
+                <a href="#" class="nav-link">>_ [02] COMPÉTENCES</a>
+                <a href="#" class="nav-link">>_ [03] PARCOURS</a>
+                <a href="#" class="nav-link">>_ [04] VEILLE</a>
+                <a href="#" class="nav-link">>_ [05] CONTACT</a>
+            </nav>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+            <div class="hero">
+                <h1>Rukiye<br><span>SAATCI</span></h1>
+                <p>Actuellement en BTS SIO (SISR) au CNED. Ambition : Experte en Cybersécurité et durcissement des infrastructures.</p>
+            </div>
+
+            <aside class="skills-panel">
+                <div class="panel">
+                    <h2>En cours d'acquisition</h2>
+                    
+                    <div class="skill-item">
+                        <i class="devicon-kali-plain"></i>
+                        <div>
+                            <div class="skill-name">Kali Linux</div>
+                            <div class="skill-desc">Bases de l'audit de sécurité</div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <i class="devicon-cisco-plain"></i>
+                        <div>
+                            <div class="skill-name">Cisco Réseaux</div>
+                            <div class="skill-desc">Routage & Commutation (CCNA)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <i class="devicon-windows8-original"></i>
+                        <div>
+                            <div class="skill-name">Windows Server</div>
+                            <div class="skill-desc">Active Directory & GPO</div>
+                        </div>
+                    </div>
+
+                </div>
+            </aside>
+        </main>
+
+        <footer class="panel">
+            [ SYSTÈME PORTFOLIO SECURE V1.0 ] - AUCUNE INTRUSION DÉTECTÉE
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.vortex.min.js"></script>
     <script>
-        // 1. Animation de la machine à écrire
-        const text = "Experte en Cybersécurité";
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, 100);
-            }
-        }
-        window.onload = type;
-
-        // 2. Animation de la grille de fond (Three.js)
-        let scene, camera, renderer, points;
-        function init() {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-            camera.position.z = 400;
-            camera.position.y = 100;
-            camera.rotation.x = -0.2;
-
-            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas-bg'), antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            const geometry = new THREE.BufferGeometry();
-            const positions = [];
-            for (let i = 0; i < 3000; i++) {
-                positions.push((Math.random() - 0.5) * 1500);
-                positions.push((Math.random() - 0.5) * 1500);
-                positions.push((Math.random() - 0.5) * 500);
-            }
-            geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(positions), 3));
-            const material = new THREE.PointsMaterial({ color: 0x0070f3, size: 1.5, transparent: true, opacity: 0.5 });
-            points = new THREE.Points(geometry, material);
-            scene.add(points);
-            animate();
-        }
-        function animate() {
-            requestAnimationFrame(animate);
-            points.rotation.y += 0.0005;
-            renderer.render(scene, camera);
-        }
-        init();
+        VANTA.VORTEX({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            backgroundColor: 0x20204, /* Noir profond */
+            color1: 0x00f2fe, /* Turquoise */
+            color2: 0x4facfe, /* Bleu électrique */
+            color3: 0xff00ff, /* Magenta */
+            size: 1.50,
+            speed: 1.00
+        })
     </script>
 </body>
 </html>
