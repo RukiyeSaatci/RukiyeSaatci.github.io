@@ -3,170 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAATCI Rukiye | SYSTEM EXPLOIT</title>
+    <title>Portfolio | SAATCI Rukiye</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --matrix-green: #00ff41;
-            --dark-green: #003b00;
-            --bg-black: #000000;
+            --neon-green: #00ff41;
+            --bg-dark: #000000;
+            --text-main: #ffffff;
+            --text-muted: #888888;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: var(--bg-black);
-            color: var(--matrix-green);
-            font-family: 'Fira Code', monospace;
-            overflow: hidden;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
             height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center; /* Centre verticalement pour que le texte soit au milieu */
         }
 
-        /* 1. EFFET MATRIX BACKGROUND (CANVAS) */
-        #matrix-canvas {
+        /* FOND MATRIX ULTRA DISCRET (STYLE MATHIEU : SOBRE) */
+        #canvas-matrix {
             position: fixed;
             top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 1;
-            opacity: 0.2;
+            opacity: 0.15; /* Réduit la visibilité pour que ce soit calme */
         }
 
-        /* 2. OVERLAY INTERFACE */
-        .interface {
+        /* INTERFACE PRINCIPALE (STYLE MATHIEU : ALIGNÉ À GAUCHE) */
+        .wrapper {
             position: relative;
             z-index: 10;
-            height: 100vh;
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            padding: 20px;
-            gap: 20px;
+            padding-left: 10%; /* Grand espace à gauche */
+            width: 100%;
         }
 
-        /* STYLE FENÊTRE TERMINAL */
-        .window {
-            border: 1px solid var(--matrix-green);
-            background: rgba(0, 0, 0, 0.8);
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
-            padding: 15px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .window::before {
-            content: "[ TERMINAL_SECURE ]";
-            display: block;
-            background: var(--matrix-green);
-            color: black;
-            font-size: 0.7rem;
-            font-weight: bold;
-            padding: 2px 10px;
-            margin-bottom: 15px;
-        }
-
-        /* HEADER & NOM */
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-left: 50px;
-        }
-
+        /* VOTRE NOM STYLE MATHIEU (FIN ET GRAND) */
         h1 {
-            font-family: 'Orbitron', sans-serif;
             font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: -3px;
             line-height: 0.9;
+            margin-bottom: 10px;
+            text-transform: none;
+        }
+
+        h1 span {
             text-transform: uppercase;
-            margin-bottom: 20px;
-            text-shadow: 0 0 20px var(--matrix-green);
         }
 
-        .ambition {
-            font-size: 1.2rem;
-            color: white;
-            border-left: 3px solid var(--matrix-green);
-            padding-left: 20px;
-            margin-bottom: 30px;
+        /* AMBITION ÉPURÉE STYLE MATHIEU */
+        .job-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
         }
 
-        /* NAVIGATION GAUCHE */
-        .nav-sidebar {
+        /* BADGES COMPÉTENCES DISCRETS */
+        .badge-container {
             display: flex;
-            flex-direction: column;
             gap: 15px;
-        }
-        .nav-item {
-            color: var(--matrix-green);
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 10px;
-            transition: 0.3s;
-            border: 1px solid transparent;
-        }
-        .nav-item:hover {
-            background: var(--matrix-green);
-            color: black;
-            box-shadow: 0 0 10px var(--matrix-green);
+            flex-wrap: wrap;
         }
 
-        /* LOGS DÉFILANTS (EFFET ANALYSE) */
-        .logs {
+        .badge {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+            padding: 6px 15px;
+            border-radius: 4px;
             font-size: 0.7rem;
-            color: var(--dark-green);
-            height: 150px;
-            overflow: hidden;
-            margin-top: 20px;
+            font-family: 'Fira Code', monospace;
+            text-transform: uppercase;
         }
 
-        .blink { animation: blinker 1s linear infinite; }
-        @keyframes blinker { 50% { opacity: 0; } }
+        /* NAVIGATION SOBRE (STYLE MATHIEU L.) */
+        nav {
+            position: fixed;
+            top: 40px;
+            right: 60px;
+            z-index: 100;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-family: 'Fira Code', monospace;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: #fff; }
+
     </style>
 </head>
 <body>
 
-    <canvas id="matrix-canvas"></canvas>
+    <canvas id="canvas-matrix"></canvas>
 
-    <div class="interface">
-        <aside class="window nav-sidebar">
-            <a href="#" class="nav-item">/root/presentation</a>
-            <a href="#" class="nav-item">/root/competences</a>
-            <a href="#" class="nav-item">/root/parcours</a>
-            <a href="#" class="nav-item">/root/contact</a>
-            
-            <div class="logs" id="log-container">
-                </div>
-        </aside>
+    <nav>
+        <a href="#about">// PROFIL</a>
+        <a href="#projects">// PROJETS</a>
+        <a href="#contact">// CONTACT</a>
+    </nav>
 
-        <main class="hero-section">
-            <div class="window" style="border:none; background:none; box-shadow:none;">
-                <p style="font-size: 0.8rem;">> INITIALIZING_IDENTITY_SCAN...</p>
-                <h1>Rukiye<br><span style="color:white;">SAATCI</span></h1>
-                <div class="ambition">
-                    <span class="blink">></span> AMBITION: EXPERTE EN CYBERSÉCURITÉ
-                </div>
-                <p style="color:#666; font-size: 0.8rem; max-width: 500px;">
-                    Étudiante en BTS SIO SISR au CNED. Spécialisée dans l'analyse de vulnérabilités et la défense périmétrique des systèmes d'information.
-                </p>
-            </div>
-        </main>
+    <div class="wrapper">
+        <h1>Rukiye<br><span>SAATCI</span></h1>
+        
+        <div class="job-title">
+            Ambition : Experte en cybersécurité
+        </div>
+
+        <div class="badge-container">
+            <div class="badge">BTS SIO SISR</div>
+            <div class="badge">CISCO CCNA</div>
+            <div class="badge">LINUX / DEBIAN</div>
+            <div class="badge">SÉCURITÉ INFRA</div>
+        </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // --- ANIMATION MATRIX ---
-        const canvas = document.getElementById('matrix-canvas');
+        const canvas = document.getElementById('canvas-matrix');
         const ctx = canvas.getContext('2d');
 
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
         const fontSize = 14;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
 
-        function drawMatrix() {
+        function draw() {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00ff41';
+            ctx.fillStyle = '#00ff41'; /* Vert mais très discret car opacity du canvas est faible */
             ctx.font = fontSize + 'px monospace';
 
             for (let i = 0; i < drops.length; i++) {
@@ -176,23 +159,13 @@
                 drops[i]++;
             }
         }
-        setInterval(drawMatrix, 35);
 
-        // --- GENERATEUR DE LOGS ---
-        const logContainer = document.getElementById('log-container');
-        const messages = [
-            "SCANNING_PORT: 80...", "ACCESS_GRANTED", "ENCRYPTING_DATA...",
-            "TRACING_IP: 192.168.1.1", "FIREWALL: ACTIVE", "KERNEL_LOADED",
-            "THREAT_LEVEL: ZERO", "BYPASSING_PROXY...", "CLEANING_CACHE..."
-        ];
+        setInterval(draw, 40);
 
-        function addLog() {
-            const p = document.createElement('p');
-            p.textContent = `[${new Date().toLocaleTimeString()}] ${messages[Math.floor(Math.random() * messages.length)]}`;
-            logContainer.prepend(p);
-            if (logContainer.children.length > 10) logContainer.lastChild.remove();
-        }
-        setInterval(addLog, 1000);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
