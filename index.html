@@ -3,136 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - SAATCI Rukiye</title>
+    <title>SAATCI Rukiye | Cyber Security Portfolio</title>
     <style>
-        /* Styles Généraux : Ambiance Dark & Cyber */
+        /* BASE & THEME DARK */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Courier New', Courier, monospace; /* Police code-like */
-            background-color: #0d1117; /* Fond presque noir (style GitHub dark) */
-            color: #c9d1d9; /* Texte gris clair/blanc */
-            line-height: 1.6;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
+            background-color: #05070a; /* Noir profond */
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
         }
 
-        /* Liens Néon Vert */
-        a {
-            color: #58a6ff; /* Bleu clair pour les liens pour l'instant */
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        a:hover {
-            color: #00ff41; /* Vert néon au survol */
-            text-shadow: 0 0 10px #00ff41; /* Effet néon */
+        /* ANIMATION D'ENTRÉE */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Entête */
+        /* CONTAINER PRINCIPAL */
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+        /* ENTÊTE STYLE DASHBOARD */
         header {
             text-align: center;
-            border-bottom: 2px solid #00ff41; /* Ligne verte néon */
-            padding-bottom: 30px;
-            margin-bottom: 30px;
-            text-shadow: 0 0 15px #00ff41;
-        }
-        header h1 {
-            color: #00ff41; /* Nom en vert néon */
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-        }
-        header p {
-            color: #c9d1d9;
-            font-size: 1.1rem;
+            padding: 60px 0;
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        /* Navigation */
+        .cyber-logo {
+            width: 80px; height: 80px;
+            border: 2px solid #00ff41;
+            margin: 0 auto 20px;
+            display: flex; align-items: center; justify-content: center;
+            color: #00ff41; font-weight: bold; font-size: 24px;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            transform: rotate(45deg);
+        }
+        .cyber-logo span { transform: rotate(-45deg); }
+
+        h1 {
+            font-size: 3rem; letter-spacing: 4px; color: #fff;
+            text-transform: uppercase; margin-bottom: 10px;
+        }
+        .subtitle { color: #00ff41; font-family: monospace; letter-spacing: 2px; }
+
+        /* NAVIGATION FLOTTANTE */
         nav {
-            text-align: center;
-            margin-bottom: 40px;
-            border-top: 1px solid #30363d;
-            border-bottom: 1px solid #30363d;
-            padding: 10px 0;
+            display: flex; justify-content: center; gap: 30px;
+            margin: 40px 0; animation: fadeInUp 1s ease-out;
         }
         nav a {
-            color: #c9d1d9;
-            margin: 0 15px;
-            font-weight: bold;
-            font-size: 1.1em;
+            color: #888; text-decoration: none; font-size: 14px;
+            text-transform: uppercase; letter-spacing: 2px;
+            padding: 10px 20px; border: 1px solid transparent;
+            transition: 0.4s;
+        }
+        nav a:hover {
+            color: #00ff41; border: 1px solid #00ff41;
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
         }
 
-        /* Sections */
-        section {
-            background-color: #161b22; /* Fond légèrement plus clair pour les blocs */
-            padding: 25px;
-            margin-top: 25px;
-            border-radius: 8px;
-            border: 1px solid #30363d; /* Bordure discrète */
-        }
-        h2 {
-            color: #00ff41; /* Titres des sections en vert */
-            border-bottom: 1px solid #00ff41;
-            padding-bottom: 10px;
-            margin-top: 0;
-            text-shadow: 0 0 5px #00ff41;
+        /* GRILLE D'INTERFACE */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            animation: fadeInUp 1.2s ease-out;
         }
 
-        /* Listes */
-        ul {
-            list-style-type: '>'; /* Puce personnalisée type terminal */
-            color: #c9d1d9;
-            padding-left: 20px;
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px; border-radius: 4px;
+            position: relative; transition: 0.3s;
         }
-        ul li {
-            margin-bottom: 10px;
+        .card:hover {
+            background: rgba(0, 255, 65, 0.02);
+            border-color: #00ff41;
+            transform: translateY(-5px);
+        }
+        .card h2 {
+            font-size: 18px; color: #00ff41; margin-bottom: 15px;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            font-size: 0.9em;
-            color: #8b949e;
-            border-top: 1px solid #30363d;
-            padding-top: 20px;
+        /* BARRE DE CHARGEMENT POUR LES COMPÉTENCES */
+        .skill-bar {
+            height: 4px; background: #222; margin-top: 10px; position: relative;
+        }
+        .skill-progress {
+            height: 100%; background: #00ff41; box-shadow: 0 0 8px #00ff41;
+        }
+
+        /* FOOTER */
+        footer {
+            text-align: center; margin-top: 100px; padding: 40px;
+            border-top: 1px solid #111; color: #444; font-family: monospace;
         }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Rukiye SAATCI</h1>
-    <p>>_ Étudiante en BTS SIO SISR | Passionnée de Cybersécurité</p>
-</header>
+<div class="container">
+    <header>
+        <div class="cyber-logo"><span>RS</span></div>
+        <h1>Rukiye SAATCI</h1>
+        <p class="subtitle">>_ SYSTEM & NETWORK SECURITY STUDENT</p>
+    </header>
 
-<nav>
-    <a href="#presentation">./Présentation</a>
-    <a href="#parcours">./Parcours</a>
-    <a href="#competences">./Compétences</a>
-    <a href="#veille">./Veille</a>
-</nav>
+    <nav>
+        <a href="#about">// ABOUT</a>
+        <a href="#skills">// SKILLS</a>
+        <a href="#projects">// REPOSITORY</a>
+        <a href="#contact">// CONTACT</a>
+    </nav>
 
-<section id="presentation">
-    <h2>01 // Présentation</h2>
-    <p>Actuellement en première année de BTS SIO au CNED, je me spécialise en Solutions d'Infrastructure, Systèmes et Réseaux (SISR). Je suis fascinée par l'administration des systèmes et l'audit de sécurité.</p>
-</section>
+    <div class="grid">
+        <div class="card" id="about">
+            <h2>01. Background</h2>
+            <p style="font-size: 14px; color: #aaa;">
+                Étudiante en 1ère année de BTS SIO (SISR) au CNED. 
+                Spécialisée dans l'administration des systèmes et la sécurisation des infrastructures.
+            </p>
+        </div>
 
-<section id="parcours">
-    <h2>02 // Parcours</h2>
-    <p>... [Frise Chronologique à venir] ...</p>
-</section>
+        <div class="card" id="skills">
+            <h2>02. Technical Skills</h2>
+            <div style="font-size: 13px;">
+                <p>NETWORK SECURITY</p>
+                <div class="skill-bar"><div class="skill-progress" style="width: 65%;"></div></div>
+                <br>
+                <p>LINUX / DEBIAN ADMINISTRATION</p>
+                <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                <br>
+                <p>ACTIVE DIRECTORY / GPO</p>
+                <div class="skill-bar"><div class="skill-progress" style="width: 50%;"></div></div>
+            </div>
+        </div>
 
-<section id="competences">
-    <h2>03 // Compétences SISR</h2>
-    <ul>
-        <li>Réseaux (Cisco CLI, Routage, Commutation)</li>
-        <li>Systèmes (Windows Server, Debian, Ubuntu)</li>
-        <li>Gestion de Parc (GLPI, OCS Inventory)</li>
-        <li>Sécurité (Bases de l'audit, Durcissement système)</li>
-    </ul>
-</section>
+        <div class="card">
+            <h2>03. Information Watch</h2>
+            <p style="font-size: 14px; color: #aaa;">
+                Veille active sur les vulnérabilités Zero-day et les nouvelles menaces Ransomware.
+            </p>
+        </div>
+    </div>
 
-<div class="footer">
-    <p>Root@Portfolio_Rukiye ~ &copy; 2026</p>
+    <footer>
+        [ SYSTEM READY ] <br>
+        CONNECTION SECURED VIA GITHUB_PAGES // 2026
+    </footer>
 </div>
 
 </body>
