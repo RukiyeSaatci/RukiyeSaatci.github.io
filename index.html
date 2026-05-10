@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rukiye SAATCI | Portfolio</title>
+    <title>Portfolio | Rukiye SAATCI</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
@@ -11,28 +11,28 @@
         :root {
             --cyber-blue: #0070f3;
             --bg-dark: #000000;
-            --text-main: #ffffff;
             --text-muted: #888888;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background-color: var(--bg-dark);
-            color: var(--text-main);
+            color: #fff;
             font-family: 'Inter', sans-serif;
             overflow: hidden;
             height: 100vh;
         }
 
-        /* FOND ANIMÉ 3D (CANVAS) */
+        /* GRILLE ANIMÉE DISCRÈTE */
         #canvas-bg {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             z-index: 1;
+            opacity: 0.4;
         }
 
-        /* NAVIGATION DISCRÈTE */
+        /* NAVIGATION MATHIEU STYLE */
         nav {
             position: fixed;
             top: 40px; right: 60px;
@@ -44,13 +44,12 @@
             text-decoration: none;
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
             font-family: 'Fira Code', monospace;
             transition: 0.3s;
         }
         nav a:hover { color: #fff; }
 
-        /* CONTENU ALIGNÉ À GAUCHE */
+        /* CONTENU PRINCIPAL */
         .hero {
             position: relative;
             z-index: 10;
@@ -59,43 +58,48 @@
             flex-direction: column;
             justify-content: center;
             padding-left: 10%;
-            pointer-events: none; /* Laisse la souris interagir avec le fond */
         }
 
         .name {
             font-size: 5rem;
             font-weight: 900;
-            letter-spacing: -3px;
-            line-height: 1;
-            margin-bottom: 15px;
-            pointer-events: auto;
+            letter-spacing: -4px; /* Effet pro Mathieu */
+            line-height: 0.9;
+            margin-bottom: 20px;
+            text-transform: none;
         }
 
-        .job-title {
+        .name span {
+            text-transform: uppercase; /* Nom de famille en majuscules */
+        }
+
+        .job-line {
             font-family: 'Fira Code', monospace;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             margin-bottom: 40px;
-            pointer-events: auto;
         }
 
-        .typing-effect {
+        /* EFFET MACHINE À ÉCRIRE */
+        .typewriter {
             color: var(--cyber-blue);
+            display: inline-block;
             border-right: 2px solid var(--cyber-blue);
             white-space: nowrap;
             overflow: hidden;
-            display: inline-block;
-            animation: typing 3.5s steps(40, end) forwards, blink 0.8s infinite;
+            width: 0;
+            animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
         }
 
         @keyframes typing { from { width: 0 } to { width: 100% } }
         @keyframes blink { from { border-color: transparent } to { border-color: var(--cyber-blue) } }
 
-        .badges { display: flex; gap: 12px; pointer-events: auto; }
+        /* BADGES SOBRES */
+        .badges { display: flex; gap: 12px; }
         .badge {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #aaa;
+            color: #666;
             padding: 6px 15px;
             border-radius: 4px;
             font-size: 0.7rem;
@@ -115,10 +119,9 @@
     </nav>
 
     <main class="hero">
-        <h1 class="name">Rukiye<br>SAATCI</h1>
-        <div class="job-title">
-            <span>Ambition : </span>
-            <span class="typing-effect">Experte en Cybersécurité</span>
+        <h1 class="name">Rukiye<br><span>SAATCI</span></h1>
+        <div class="job-line">
+            Ambition : <span class="typewriter">Experte en Cybersécurité</span>
         </div>
         <div class="badges">
             <div class="badge">BTS SIO SISR</div>
@@ -131,39 +134,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         let scene, camera, renderer, particles;
-        let mouseX = 0, mouseY = 0;
-
         function init() {
             scene = new THREE.Scene();
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
-            camera.position.z = 400;
+            camera.position.z = 500;
+            camera.position.y = 200;
+            camera.rotation.x = -0.5;
 
             renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas-bg'), antialias: true, alpha: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
 
-            const numParticles = 2000;
-            const positions = new Float32Array(numParticles * 3);
+            const numX = 60, numY = 50;
+            const positions = new Float32Array(numX * numY * 3);
             const geometry = new THREE.BufferGeometry();
             
             let i = 0;
-            for (let x = 0; x < 50; x++) {
-                for (let y = 0; y < 40; y++) {
-                    positions[i] = x * 30 - 750;
-                    positions[i + 1] = y * 30 - 600;
+            for (let x = 0; x < numX; x++) {
+                for (let y = 0; y < numY; y++) {
+                    positions[i] = x * 35 - (numX * 35 / 2);
+                    positions[i + 1] = y * 35 - (numY * 35 / 2);
                     positions[i + 2] = 0;
                     i += 3;
                 }
             }
 
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-            const material = new THREE.PointsMaterial({ color: 0x0070f3, size: 2, transparent: true, opacity: 0.5 });
+            const material = new THREE.PointsMaterial({ color: 0x0070f3, size: 1.5, transparent: true, opacity: 0.3 });
             particles = new THREE.Points(geometry, material);
             scene.add(particles);
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = (e.clientX - window.innerWidth / 2) / 10;
-                mouseY = (e.clientY - window.innerHeight / 2) / 10;
-            });
             animate();
         }
 
@@ -171,20 +169,17 @@
             requestAnimationFrame(animate);
             const positions = particles.geometry.attributes.position.array;
             let i = 0;
-            const time = Date.now() * 0.001;
+            const time = Date.now() * 0.0008;
 
-            for (let x = 0; x < 50; x++) {
-                for (let y = 0; y < 40; y++) {
-                    positions[i + 2] = Math.sin(x * 0.3 + time) * 20 + Math.cos(y * 0.5 + time) * 20;
+            for (let x = 0; x < 60; x++) {
+                for (let y = 0; y < 50; y++) {
+                    positions[i + 2] = Math.sin(x * 0.2 + time) * 35 + Math.cos(y * 0.2 + time) * 35;
                     i += 3;
                 }
             }
             particles.geometry.attributes.position.needsUpdate = true;
-            particles.rotation.x = mouseY * 0.01;
-            particles.rotation.y = mouseX * 0.01;
             renderer.render(scene, camera);
         }
-
         init();
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
