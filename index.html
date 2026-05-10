@@ -3,169 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | SAATCI Rukiye</title>
+    <title>Portfolio | Rukiye SAATCI</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code&display=swap" rel="stylesheet">
 
     <style>
-        :root {
-            --neon-green: #00ff41;
-            --bg-dark: #000000;
-            --text-main: #ffffff;
-            --text-muted: #888888;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .font-code { font-family: 'Fira Code', monospace; }
+        #canvas-bg { position: fixed; top: 0; left: 0; z-index: 0; opacity: 0.2; pointer-events: none; }
         
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            font-family: 'Inter', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            align-items: center; /* Centre verticalement pour que le texte soit au milieu */
+        /* Animation subtile pour les boutons */
+        .btn-cyber {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        /* FOND MATRIX ULTRA DISCRET (STYLE MATHIEU : SOBRE) */
-        #canvas-matrix {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            opacity: 0.15; /* Réduit la visibilité pour que ce soit calme */
+        .btn-cyber:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 112, 243, 0.4);
         }
-
-        /* INTERFACE PRINCIPALE (STYLE MATHIEU : ALIGNÉ À GAUCHE) */
-        .wrapper {
-            position: relative;
-            z-index: 10;
-            padding-left: 10%; /* Grand espace à gauche */
-            width: 100%;
-        }
-
-        /* VOTRE NOM STYLE MATHIEU (FIN ET GRAND) */
-        h1 {
-            font-size: 5rem;
-            font-weight: 900;
-            letter-spacing: -3px;
-            line-height: 0.9;
-            margin-bottom: 10px;
-            text-transform: none;
-        }
-
-        h1 span {
-            text-transform: uppercase;
-        }
-
-        /* AMBITION ÉPURÉE STYLE MATHIEU */
-        .job-title {
-            font-family: 'Fira Code', monospace;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-        }
-
-        /* BADGES COMPÉTENCES DISCRETS */
-        .badge-container {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #666;
-            padding: 6px 15px;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            font-family: 'Fira Code', monospace;
-            text-transform: uppercase;
-        }
-
-        /* NAVIGATION SOBRE (STYLE MATHIEU L.) */
-        nav {
-            position: fixed;
-            top: 40px;
-            right: 60px;
-            z-index: 100;
-            display: flex;
-            gap: 30px;
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            font-family: 'Fira Code', monospace;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        nav a:hover { color: #fff; }
-
     </style>
 </head>
 <body>
 
-    <canvas id="canvas-matrix"></canvas>
+    <canvas id="canvas-bg"></canvas>
 
-    <nav>
-        <a href="#about">// PROFIL</a>
-        <a href="#projects">// PROJETS</a>
-        <a href="#contact">// CONTACT</a>
+    <nav class="fixed top-0 w-full z-50 px-12 py-8 flex justify-between items-center backdrop-blur-sm border-b border-white/5">
+        <div class="text-xl font-black tracking-tighter">R.<span class="text-blue-600">S</span></div>
+        <div class="hidden md:flex gap-8 font-code text-[10px] tracking-widest text-gray-500 uppercase">
+            <a href="#bio" class="hover:text-white transition">Présentation</a>
+            <a href="#skills" class="hover:text-white transition">Compétences</a>
+            <a href="#contact" class="hover:text-white transition">Contact</a>
+        </div>
     </nav>
 
-    <div class="wrapper">
-        <h1>Rukiye<br><span>SAATCI</span></h1>
-        
-        <div class="job-title">
-            Ambition : Experte en cybersécurité
-        </div>
+    <main class="relative z-10 h-screen flex flex-col justify-center px-[10%]">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/10 border border-blue-600/20 text-blue-500 text-[10px] font-code mb-8">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                </span>
+                SISR EN FORMATION // CNED
+            </div>
 
-        <div class="badge-container">
-            <div class="badge">BTS SIO SISR</div>
-            <div class="badge">CISCO CCNA</div>
-            <div class="badge">LINUX / DEBIAN</div>
-            <div class="badge">SÉCURITÉ INFRA</div>
-        </div>
-    </div>
+            <h1 class="text-6xl md:text-8xl font-black leading-tight tracking-tighter mb-4">
+                Rukiye<br>
+                <span class="uppercase tracking-[0.2em] text-white/90">SAATCI</span>
+            </h1>
+            
+            <p class="font-code text-blue-600 text-lg mb-10">
+                Ambition : <span class="text-white">Experte en Cybersécurité</span>
+            </p>
 
+            <div class="flex gap-4">
+                <a href="#contact" class="btn-cyber px-8 py-3 bg-blue-600 rounded-lg font-bold text-sm">Me contacter</a>
+                <a href="#" class="btn-cyber px-8 py-3 border border-white/10 rounded-lg font-bold text-sm text-gray-400 hover:text-white">Mon CV</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        const canvas = document.getElementById('canvas-matrix');
-        const ctx = canvas.getContext('2d');
+        AOS.init();
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function draw() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#00ff41'; /* Vert mais très discret car opacity du canvas est faible */
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
+        // Fond Matrix Bleu très discret
+        let scene, camera, renderer, points;
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.z = 400;
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas-bg'), antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            const geo = new THREE.BufferGeometry();
+            const pos = [];
+            for (let i = 0; i < 2000; i++) {
+                pos.push((Math.random() - 0.5) * 1500, (Math.random() - 0.5) * 1500, (Math.random() - 0.5) * 500);
             }
+            geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pos), 3));
+            points = new THREE.Points(geo, new THREE.PointsMaterial({ color: 0x0070f3, size: 1.5, transparent: true, opacity: 0.5 }));
+            scene.add(points);
+            animate();
         }
-
-        setInterval(draw, 40);
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+        function animate() {
+            requestAnimationFrame(animate);
+            points.rotation.y += 0.0003;
+            renderer.render(scene, camera);
+        }
+        init();
     </script>
 </body>
 </html>
