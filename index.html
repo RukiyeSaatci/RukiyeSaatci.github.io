@@ -3,190 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAATCI Rukiye | Portfolio SISR</title>
+    <title>SAATCI Rukiye | Opératrice SISR</title>
     <style>
+        /* CONFIGURATION GLOBALE CYBER */
         :root {
-            --neon-green: #00ff41;
-            --dark-bg: #050505;
-            --text-main: #ffffff;
-            --text-muted: #888;
+            --neon-green: #00ff41; /* Vert Matrix pur */
+            --dark-bg: #050505; /* Noir profond */
+            --panel-bg: #0a0a0c; /* Noir légèrement plus clair pour les panneaux */
+            --border-color: #1a1a1c; /* Bordure sombre par défaut */
+            --text-main: #e0e0e0;
+            --text-muted: #666;
+            --glow: 0 0 10px rgba(0, 255, 65, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background-color: var(--dark-bg);
             color: var(--text-main);
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            overflow: hidden; /* Pour garder l'effet dashboard fixe */
         }
 
-        /* BANDEAU LUMINEUX SUPÉRIEUR */
-        header {
+        /* GRILLE PRINCIPALE (Structure de tes images) */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 250px 1fr 300px; /* Gauche | Centre | Droite */
+            grid-template-rows: 80px 1fr 60px; /* Haut | Milieu | Bas */
+            width: 100%;
+            height: 100%;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        /* ÉLÉMENTS DE LA GRILLE */
+        .panel {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel:hover {
+            border-color: var(--neon-green);
+            box-shadow: var(--glow);
+        }
+
+        /* 1. BARRE SUPÉRIEURE (HEADER) */
+        .header {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 2px solid var(--neon-green);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+        .header h1 {
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #fff;
+        }
+        .status {
+            color: var(--neon-green);
+            font-family: monospace;
+            font-size: 0.8rem;
+            text-shadow: 0 0 5px var(--neon-green);
+        }
+
+        /* 2. MENU GAUCHE (ASIDE) */
+        .aside-left {
+            grid-row: 2 / 3;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 100px 20px;
-            border-top: 2px solid var(--neon-green);
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.15);
-            background: linear-gradient(to bottom, rgba(0, 255, 65, 0.05), transparent);
+            gap: 10px;
         }
-
-        .terminal-user {
-            font-family: 'Courier New', monospace;
-            color: var(--neon-green);
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            font-weight: 200;
-            margin-bottom: 15px;
-        }
-
-        .specialite {
-            color: var(--text-muted);
-            font-family: monospace;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        /* NAVIGATION ÉPURÉE */
-        nav {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 50px 0;
-        }
-
-        nav a {
+        .nav-link {
             text-decoration: none;
             color: var(--text-muted);
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            transition: 0.3s;
-            font-family: monospace;
-        }
-
-        nav a:hover {
-            color: var(--neon-green);
-            text-shadow: 0 0 10px var(--neon-green);
-        }
-
-        /* CONTENU */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        section {
-            margin-bottom: 80px;
-            animation: fadeIn 1.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        h2 {
-            font-size: 1.2rem;
-            color: var(--neon-green);
-            margin-bottom: 30px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border-left: 2px solid var(--neon-green);
-            padding-left: 15px;
-        }
-
-        .card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 2px;
-        }
-
-        .bio-text {
-            color: #ccc;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        /* LISTE DE COMPÉTENCES STYLE TERMINAL */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .skills-grid li {
-            color: #aaa;
             font-family: monospace;
             font-size: 0.9rem;
+            padding: 10px;
+            border-left: 2px solid transparent;
+            transition: 0.3s;
         }
-
-        .skills-grid li::before {
-            content: "> ";
+        .nav-link:hover {
             color: var(--neon-green);
+            border-left-color: var(--neon-green);
+            background: rgba(0, 255, 65, 0.05);
         }
 
-        /* FOOTER */
-        footer {
+        /* 3. ZONE CENTRALE (MAIN) */
+        .main-center {
+            grid-row: 2 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        /* L'Hexagone Central (Remplace la photo) */
+        .center-hex {
+            width: 250px;
+            height: 250px;
+            background: rgba(0, 255, 65, 0.02);
+            border: 2px solid var(--neon-green);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--neon-green);
+            font-size: 4rem;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.2);
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* 4. ZONE DROITE (INFO PANELS) */
+        .aside-right {
+            grid-row: 2 / 3;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .right-panel {
+            flex: 1; /* S'étendent verticalement */
+        }
+        h2 {
+            font-size: 1rem;
+            color: var(--neon-green);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .skill-item {
+            color: #aaa;
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #1a1a1c;
+            padding-bottom: 4px;
+        }
+
+        /* 5. BARRE INFÉRIEURE (FOOTER) */
+        .footer {
+            grid-column: 1 / -1;
             text-align: center;
-            padding: 80px;
-            color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
             font-family: monospace;
             font-size: 0.7rem;
-            letter-spacing: 2px;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="terminal-user">[ USER: RS_ROOT ]</div>
-        <h1>Rukiye SAATCI</h1>
-        <p class="specialite">Étudiante BTS SIO SISR // Cybersécurité</p>
-    </header>
+    <div class="dashboard">
+        <header class="panel header">
+            <h1>Rukiye SAATCI</h1>
+            <div class="status">>_ CORE_SYSTEM: ACTIVE // SISR_OPERATOR</div>
+        </header>
 
-    <nav>
-        <a href="#presentation">01_PRÉSENTATION</a>
-        <a href="#competences">02_COMPÉTENCES</a>
-        <a href="#parcours">03_PARCOURS</a>
-        <a href="#contact">04_CONTACT</a>
-    </nav>
+        <aside class="panel aside-left">
+            <h2>Navigation</h2>
+            <a href="#" class="nav-link">>> [01] PRÉSENTATION</a>
+            <a href="#" class="nav-link">>> [02] COMPÉTENCES</a>
+            <a href="#" class="nav-link">>> [03] PARCOURS</a>
+            <a href="#" class="nav-link">>> [04] VEILLE</a>
+            <a href="#" class="nav-link">>> [05] CONTACT</a>
+        </aside>
 
-    <div class="container">
-        <section id="presentation">
-            <div class="card">
-                <h2>Profil Professionnel</h2>
-                <p class="bio-text">Actuellement en première année de BTS SIO au CNED, je prépare ma spécialisation en Solutions d'Infrastructure, Systèmes et Réseaux (SISR).</p>
-                <p class="bio-text">Mon objectif est de maîtriser la sécurisation des environnements informatiques et de devenir experte en administration réseaux.</p>
+        <main class="panel main-center">
+            <div class="center-hex">RS</div>
+        </main>
+
+        <aside class="aside-right">
+            <div class="panel right-panel">
+                <h2>Profil Technique</h2>
+                <p style="color: #aaa; font-size: 0.9rem;">Étudiante en première année de BTS SIO au CNED, spécialité SISR. Focalisée sur l'administration sécurisée des infrastructures et la gestion des réseaux.</p>
             </div>
-        </section>
+            <div class="panel right-panel">
+                <h2>Objectifs SISR 2026</h2>
+                <div class="skill-item">> Administration Cisco CLI</div>
+                <div class="skill-item">> Gestion parc (GLPI/OCS)</div>
+                <div class="skill-item">> Services Windows Server & AD</div>
+                <div class="skill-item">> Administration Linux (Debian)</div>
+                <div class="skill-item">> Fondamentaux Cybersécurité</div>
+            </div>
+        </aside>
 
-        <section id="competences">
-            <h2>Objectifs d'apprentissage 2026</h2>
-            <ul class="skills-grid">
-                <li>Administration Réseaux (Cisco CLI)</li>
-                <li>Systèmes Linux (Debian / Ubuntu)</li>
-                <li>Services Windows Server & AD</li>
-                <li>Gestion de parc (GLPI / OCS)</li>
-                <li>Protocoles de routage & Commutation</li>
-                <li>Fondamentaux de la Cybersécurité</li>
-            </ul>
-        </section>
+        <footer class="panel footer">
+            -- SECURE CONNECTION ESTABLISHED via GITHUB_PAGES --
+        </footer>
     </div>
-
-    <footer>
-        -- SYSTÈME ACTIF // PORTFOLIO_SECURE_V1 --
-    </footer>
 
 </body>
 </html>
