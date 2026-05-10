@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio | Rukiye SAATCI</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* CONFIGURATION GLOBALE CYBER */
         :root {
-            --cyber-blue: #0070f3; /* Le bleu vif de Mathieu */
-            --bg-dark: #000000; /* Noir pur */
+            --cyber-blue: #0070f3; /* Le bleu de Mathieu */
+            --bg-dark: #000000;
             --text-main: #ffffff;
             --text-muted: #888888;
         }
@@ -21,11 +20,11 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            overflow: hidden;
+            overflow: hidden; /* Garde l'effet dashboard fixe */
             height: 100vh;
         }
 
-        /* GESTION DU FOND ANIMÉ (PARTICLES) */
+        /* FOND ANIMÉ */
         #particles-js {
             position: fixed;
             top: 0; left: 0;
@@ -33,30 +32,52 @@
             z-index: 1; /* Derrière le contenu */
         }
 
-        /* CONTENU PRINCIPAL ALIGNÉ À GAUCHE */
-        .content-left {
+        /* NAVIGATION EXCLUSIVE (STYLE MATHIEU L.) */
+        nav {
+            position: fixed;
+            top: 40px; /* Plus d'espace en haut */
+            right: 60px; /* Plus d'espace à droite */
+            z-index: 100;
+            display: flex;
+            gap: 30px;
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Fira Code', monospace;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #fff;
+        }
+
+        /* CONTENU CENTRAL (LA GRANDE DIFFÉRENCE EST ICI) */
+        .content {
             position: relative;
             z-index: 10;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center; /* Centre verticalement */
-            height: 100vh;
-            padding-left: 10%; /* Marge à gauche style Mathieu */
+            padding-left: 10%; /* Grand espace à gauche style Mathieu */
             text-align: left;
         }
 
-        /* VOTRE NOM STYLE MATHIEU */
+        /* VOTRE NOM STYLE MATHIEU (POLICE ÉNORME ET FINE) */
         .hero-name {
-            font-size: 4.5rem;
-            font-weight: 900;
-            letter-spacing: -3px;
-            line-height: 1;
+            font-size: 4.5rem; /* Taille massive */
+            font-weight: 900; /* Poids léger style Mathieu */
+            letter-spacing: -3px; /* Rapproche les lettres style Mathieu */
+            line-height: 1.1; /* Rapproche les lignes style Mathieu */
             margin-bottom: 10px;
         }
 
         /* AMBITION AVEC EFFET MACHINE À ÉCRIRE */
         .profession-container {
-            font-family: 'Courier Prime', monospace;
+            font-family: 'Fira Code', monospace;
             font-size: 1.2rem;
             color: var(--text-muted);
             display: flex;
@@ -87,46 +108,28 @@
             to { border-color: var(--cyber-blue) }
         }
 
-        /* BADGES DE COMPÉTENCES STYLE MATHIEU */
+        /* BADGES DE COMPÉTENCES (STYLE MATHIEU : SOBRES, PAS GRAS) */
         .skills-group {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
         .badge {
-            background: rgba(0, 112, 243, 0.1);
-            border: 1px solid rgba(0, 112, 243, 0.3);
-            color: var(--cyber-blue);
+            background: rgba(20, 20, 22, 0.7); /* Gris très foncé style Mathieu */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Bordure fine style Mathieu */
+            color: #aaa; /* Gris clair style Mathieu */
             padding: 5px 15px;
             border-radius: 5px;
             font-size: 0.75rem;
-            font-family: monospace;
+            font-family: 'Fira Code', monospace;
             letter-spacing: 1px;
             text-transform: uppercase;
             transition: 0.3s;
         }
         .badge:hover {
             border-color: var(--cyber-blue);
-            box-shadow: 0 0 10px rgba(0, 112, 243, 0.2);
-        }
-
-        /* NAVIGATION DISCRÈTE EN HAUT À DROITE */
-        nav {
-            position: fixed;
-            top: 40px;
-            right: 60px;
-            z-index: 100;
-        }
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 30px;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-        nav a:hover {
-            color: #fff;
+            color: var(--cyber-blue);
+            box-shadow: 0 0 10px rgba(0, 112, 243, 0.1);
         }
 
     </style>
@@ -141,7 +144,7 @@
         <a href="#contact">// CONTACT</a>
     </nav>
 
-    <main class="content-left">
+    <main class="content">
         <h1 class="hero-name">Rukiye<br>SAATCI</h1>
         
         <div class="profession-container">
@@ -152,8 +155,7 @@
         <div class="skills-group">
             <div class="badge">BTS SIO SISR</div>
             <div class="badge">CISCO RÉSEAUX</div>
-            <div class="badge
-            ">LINUX / DEBIAN</div>
+            <div class="badge">LINUX / DEBIAN</div>
             <div class="badge">WINDOWS SERVER</div>
             <div class="badge">AUDIT DE SÉCURITÉ</div>
         </div>
