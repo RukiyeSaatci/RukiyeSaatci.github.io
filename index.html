@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Rukiye SAATCI</title>
+    <title>Rukiye SAATCI | Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --cyber-blue: #0070f3; /* Le bleu de Mathieu */
+            --cyber-blue: #0070f3;
             --bg-dark: #000000;
             --text-main: #ffffff;
             --text-muted: #888888;
@@ -20,26 +20,24 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Garde l'effet dashboard fixe */
+            overflow: hidden;
             height: 100vh;
         }
 
-        /* FOND ANIMÉ */
-        #particles-js {
+        /* FOND ANIMÉ 3D (CANVAS) */
+        #canvas-bg {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1; /* Derrière le contenu */
+            z-index: 1;
         }
 
-        /* NAVIGATION EXCLUSIVE (STYLE MATHIEU L.) */
+        /* NAVIGATION DISCRÈTE */
         nav {
             position: fixed;
-            top: 40px; /* Plus d'espace en haut */
-            right: 60px; /* Plus d'espace à droite */
+            top: 40px; right: 60px;
             z-index: 100;
-            display: flex;
-            gap: 30px;
+            display: flex; gap: 30px;
         }
         nav a {
             color: var(--text-muted);
@@ -50,135 +48,148 @@
             font-family: 'Fira Code', monospace;
             transition: 0.3s;
         }
-        nav a:hover {
-            color: #fff;
-        }
+        nav a:hover { color: #fff; }
 
-        /* CONTENU CENTRAL (LA GRANDE DIFFÉRENCE EST ICI) */
-        .content {
+        /* CONTENU ALIGNÉ À GAUCHE */
+        .hero {
             position: relative;
             z-index: 10;
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centre verticalement */
-            padding-left: 10%; /* Grand espace à gauche style Mathieu */
-            text-align: left;
+            justify-content: center;
+            padding-left: 10%;
+            pointer-events: none; /* Laisse la souris interagir avec le fond */
         }
 
-        /* VOTRE NOM STYLE MATHIEU (POLICE ÉNORME ET FINE) */
-        .hero-name {
-            font-size: 4.5rem; /* Taille massive */
-            font-weight: 900; /* Poids léger style Mathieu */
-            letter-spacing: -3px; /* Rapproche les lettres style Mathieu */
-            line-height: 1.1; /* Rapproche les lignes style Mathieu */
-            margin-bottom: 10px;
+        .name {
+            font-size: 5rem;
+            font-weight: 900;
+            letter-spacing: -3px;
+            line-height: 1;
+            margin-bottom: 15px;
+            pointer-events: auto;
         }
 
-        /* AMBITION AVEC EFFET MACHINE À ÉCRIRE */
-        .profession-container {
+        .job-title {
             font-family: 'Fira Code', monospace;
             font-size: 1.2rem;
             color: var(--text-muted);
-            display: flex;
-            align-items: center;
-            gap: 10px;
             margin-bottom: 40px;
+            pointer-events: auto;
         }
 
-        .typing-text {
+        .typing-effect {
             color: var(--cyber-blue);
             border-right: 2px solid var(--cyber-blue);
             white-space: nowrap;
             overflow: hidden;
-            width: 0;
+            display: inline-block;
             animation: typing 3.5s steps(40, end) forwards, blink 0.8s infinite;
-            text-shadow: 0 0 10px var(--cyber-blue);
         }
 
-        /* Keyframes pour l'effet de frappe */
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink { from { border-color: transparent } to { border-color: var(--cyber-blue) } }
 
-        /* Keyframes pour le curseur qui clignote */
-        @keyframes blink {
-            from { border-color: transparent }
-            to { border-color: var(--cyber-blue) }
-        }
-
-        /* BADGES DE COMPÉTENCES (STYLE MATHIEU : SOBRES, PAS GRAS) */
-        .skills-group {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
+        .badges { display: flex; gap: 12px; pointer-events: auto; }
         .badge {
-            background: rgba(20, 20, 22, 0.7); /* Gris très foncé style Mathieu */
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Bordure fine style Mathieu */
-            color: #aaa; /* Gris clair style Mathieu */
-            padding: 5px 15px;
-            border-radius: 5px;
-            font-size: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-size: 0.7rem;
             font-family: 'Fira Code', monospace;
-            letter-spacing: 1px;
             text-transform: uppercase;
-            transition: 0.3s;
         }
-        .badge:hover {
-            border-color: var(--cyber-blue);
-            color: var(--cyber-blue);
-            box-shadow: 0 0 10px rgba(0, 112, 243, 0.1);
-        }
-
     </style>
 </head>
 <body>
 
-    <div id="particles-js"></div>
+    <canvas id="canvas-bg"></canvas>
 
     <nav>
-        <a href="#about">// PROFIL</a>
-        <a href="#parcours">// PARCOURS</a>
-        <a href="#contact">// CONTACT</a>
+        <a href="#">// PROFIL</a>
+        <a href="#">// PARCOURS</a>
+        <a href="#">// CONTACT</a>
     </nav>
 
-    <main class="content">
-        <h1 class="hero-name">Rukiye<br>SAATCI</h1>
-        
-        <div class="profession-container">
-            <span>Ambition :</span>
-            <span class="typing-text">Experte en Cybersécurité</span>
+    <main class="hero">
+        <h1 class="name">Rukiye<br>SAATCI</h1>
+        <div class="job-title">
+            <span>Ambition : </span>
+            <span class="typing-effect">Experte en Cybersécurité</span>
         </div>
-
-        <div class="skills-group">
+        <div class="badges">
             <div class="badge">BTS SIO SISR</div>
-            <div class="badge">CISCO RÉSEAUX</div>
-            <div class="badge">LINUX / DEBIAN</div>
-            <div class="badge">WINDOWS SERVER</div>
-            <div class="badge">AUDIT DE SÉCURITÉ</div>
+            <div class="badge">CISCO</div>
+            <div class="badge">LINUX</div>
+            <div class="badge">SÉCURITÉ</div>
         </div>
     </main>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#0070f3" }, /* Couleur des particules en bleu */
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.2, "random": false },
-                "size": { "value": 2, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#0070f3", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
-            },
-            "retina_detect": true
+        let scene, camera, renderer, particles;
+        let mouseX = 0, mouseY = 0;
+
+        function init() {
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+            camera.position.z = 400;
+
+            renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('canvas-bg'), antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            const numParticles = 2000;
+            const positions = new Float32Array(numParticles * 3);
+            const geometry = new THREE.BufferGeometry();
+            
+            let i = 0;
+            for (let x = 0; x < 50; x++) {
+                for (let y = 0; y < 40; y++) {
+                    positions[i] = x * 30 - 750;
+                    positions[i + 1] = y * 30 - 600;
+                    positions[i + 2] = 0;
+                    i += 3;
+                }
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const material = new THREE.PointsMaterial({ color: 0x0070f3, size: 2, transparent: true, opacity: 0.5 });
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX - window.innerWidth / 2) / 10;
+                mouseY = (e.clientY - window.innerHeight / 2) / 10;
+            });
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const positions = particles.geometry.attributes.position.array;
+            let i = 0;
+            const time = Date.now() * 0.001;
+
+            for (let x = 0; x < 50; x++) {
+                for (let y = 0; y < 40; y++) {
+                    positions[i + 2] = Math.sin(x * 0.3 + time) * 20 + Math.cos(y * 0.5 + time) * 20;
+                    i += 3;
+                }
+            }
+            particles.geometry.attributes.position.needsUpdate = true;
+            particles.rotation.x = mouseY * 0.01;
+            particles.rotation.y = mouseX * 0.01;
+            renderer.render(scene, camera);
+        }
+
+        init();
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
     </script>
 </body>
