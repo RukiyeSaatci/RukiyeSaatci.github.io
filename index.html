@@ -5,51 +5,134 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - SAATCI Rukiye</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: auto; padding: 20px; background-color: #f4f7f6; }
-        header { background: #2c3e50; color: #ffffff; padding: 2rem; text-align: center; border-radius: 8px; margin-bottom: 20px; }
-        nav { background: #34495e; padding: 10px; border-radius: 8px; text-align: center; position: sticky; top: 0; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
-        section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h2 { color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 5px; }
-        .footer { text-align: center; margin-top: 40px; font-size: 0.9em; color: #777; }
+        /* Styles Généraux : Ambiance Dark & Cyber */
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Police code-like */
+            background-color: #0d1117; /* Fond presque noir (style GitHub dark) */
+            color: #c9d1d9; /* Texte gris clair/blanc */
+            line-height: 1.6;
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        /* Liens Néon Vert */
+        a {
+            color: #58a6ff; /* Bleu clair pour les liens pour l'instant */
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        a:hover {
+            color: #00ff41; /* Vert néon au survol */
+            text-shadow: 0 0 10px #00ff41; /* Effet néon */
+        }
+
+        /* Entête */
+        header {
+            text-align: center;
+            border-bottom: 2px solid #00ff41; /* Ligne verte néon */
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px #00ff41;
+        }
+        header h1 {
+            color: #00ff41; /* Nom en vert néon */
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+        header p {
+            color: #c9d1d9;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        nav {
+            text-align: center;
+            margin-bottom: 40px;
+            border-top: 1px solid #30363d;
+            border-bottom: 1px solid #30363d;
+            padding: 10px 0;
+        }
+        nav a {
+            color: #c9d1d9;
+            margin: 0 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Sections */
+        section {
+            background-color: #161b22; /* Fond légèrement plus clair pour les blocs */
+            padding: 25px;
+            margin-top: 25px;
+            border-radius: 8px;
+            border: 1px solid #30363d; /* Bordure discrète */
+        }
+        h2 {
+            color: #00ff41; /* Titres des sections en vert */
+            border-bottom: 1px solid #00ff41;
+            padding-bottom: 10px;
+            margin-top: 0;
+            text-shadow: 0 0 5px #00ff41;
+        }
+
+        /* Listes */
+        ul {
+            list-style-type: '>'; /* Puce personnalisée type terminal */
+            color: #c9d1d9;
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #8b949e;
+            border-top: 1px solid #30363d;
+            padding-top: 20px;
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Rukiye SAATCI</h1>
-    <p>Étudiante en BTS SIO - Solutions d'Infrastructure, Systèmes et Réseaux (SISR)</p>
+    <p>>_ Étudiante en BTS SIO SISR | Passionnée de Cybersécurité</p>
 </header>
 
 <nav>
-    <a href="#presentation">Présentation</a>
-    <a href="#parcours">Parcours</a>
-    <a href="#competences">Compétences</a>
-    <a href="#veille">Veille</a>
+    <a href="#presentation">./Présentation</a>
+    <a href="#parcours">./Parcours</a>
+    <a href="#competences">./Compétences</a>
+    <a href="#veille">./Veille</a>
 </nav>
 
 <section id="presentation">
-    <h2>Présentation Personnelle</h2>
-    <p>Actuellement en première année de BTS SIO au CNED, je m'oriente vers la spécialité SISR. Passionnée par l'informatique, je souhaite approfondir mes connaissances en administration réseaux et en cybersécurité.</p>
-    <p><strong>Objectif :</strong> Devenir administratrice systèmes et réseaux.</p>
+    <h2>01 // Présentation</h2>
+    <p>Actuellement en première année de BTS SIO au CNED, je me spécialise en Solutions d'Infrastructure, Systèmes et Réseaux (SISR). Je suis fascinée par l'administration des systèmes et l'audit de sécurité.</p>
 </section>
 
 <section id="parcours">
-    <h2>Mon Parcours</h2>
-    <p><em>(Ici, on ajoutera ta frise chronologique du Bac jusqu'à aujourd'hui)</em></p>
+    <h2>02 // Parcours</h2>
+    <p>... [Frise Chronologique à venir] ...</p>
 </section>
 
 <section id="competences">
-    <h2>Compétences en cours d'acquisition</h2>
+    <h2>03 // Compétences SISR</h2>
     <ul>
-        <li>Gestion de parc (GLPI, OCS Inventory)</li>
-        <li>Réseau (Configuration Cisco CLI)</li>
-        <li>Système (Installation Windows/Linux, Active Directory)</li>
+        <li>Réseaux (Cisco CLI, Routage, Commutation)</li>
+        <li>Systèmes (Windows Server, Debian, Ubuntu)</li>
+        <li>Gestion de Parc (GLPI, OCS Inventory)</li>
+        <li>Sécurité (Bases de l'audit, Durcissement système)</li>
     </ul>
 </section>
 
 <div class="footer">
-    <p>&copy; 2026 - Rukiye SAATCI - Portfolio Professionnel</p>
+    <p>Root@Portfolio_Rukiye ~ &copy; 2026</p>
 </div>
 
 </body>
