@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rukiye SAATCI | Portfolio</title>
+    <title>Portfolio | Rukiye SAATCI</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
     <style>
+        /* CONFIGURATION GLOBALE CYBER */
         :root {
-            --cyber-blue: #0070f3; /* Le bleu de Mathieu */
-            --bg-dark: #000000;
+            --cyber-blue: #0070f3; /* Le bleu vif de Mathieu */
+            --bg-dark: #000000; /* Noir pur */
             --text-main: #ffffff;
             --text-muted: #888888;
-            --border: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,83 +25,92 @@
             height: 100vh;
         }
 
-        /* FOND ANIMÉ */
+        /* GESTION DU FOND ANIMÉ (PARTICLES) */
         #particles-js {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1;
+            z-index: 1; /* Derrière le contenu */
         }
 
-        /* CONTENU PRINCIPAL */
-        .content {
+        /* CONTENU PRINCIPAL ALIGNÉ À GAUCHE */
+        .content-left {
             position: relative;
             z-index: 10;
-            height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding-left: 10%;
+            justify-content: center; /* Centre verticalement */
+            height: 100vh;
+            padding-left: 10%; /* Marge à gauche style Mathieu */
+            text-align: left;
         }
 
-        /* TEXTE À GAUCHE STYLE MATHIEU */
-        .name {
+        /* VOTRE NOM STYLE MATHIEU */
+        .hero-name {
             font-size: 4.5rem;
             font-weight: 900;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
             line-height: 1;
             margin-bottom: 10px;
         }
 
+        /* AMBITION AVEC EFFET MACHINE À ÉCRIRE */
         .profession-container {
-            font-family: 'Fira Code', monospace;
+            font-family: 'Courier Prime', monospace;
             font-size: 1.2rem;
             color: var(--text-muted);
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 40px;
         }
 
-        /* ANIMATION TEXTE EXPERTE CYBER */
         .typing-text {
             color: var(--cyber-blue);
             border-right: 2px solid var(--cyber-blue);
             white-space: nowrap;
             overflow: hidden;
             width: 0;
-            animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+            animation: typing 3.5s steps(40, end) forwards, blink 0.8s infinite;
+            text-shadow: 0 0 10px var(--cyber-blue);
         }
 
+        /* Keyframes pour l'effet de frappe */
         @keyframes typing {
             from { width: 0 }
             to { width: 100% }
         }
 
+        /* Keyframes pour le curseur qui clignote */
         @keyframes blink {
             from { border-color: transparent }
             to { border-color: var(--cyber-blue) }
         }
 
-        /* BADGES COMPÉTENCES EN BAS */
-        .skills {
-            margin-top: 50px;
+        /* BADGES DE COMPÉTENCES STYLE MATHIEU */
+        .skills-group {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
-
         .badge {
             background: rgba(0, 112, 243, 0.1);
             border: 1px solid rgba(0, 112, 243, 0.3);
             color: var(--cyber-blue);
-            padding: 5px 12px;
-            border-radius: 4px;
+            padding: 5px 15px;
+            border-radius: 5px;
             font-size: 0.75rem;
-            font-family: 'Fira Code', monospace;
+            font-family: monospace;
+            letter-spacing: 1px;
             text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .badge:hover {
+            border-color: var(--cyber-blue);
+            box-shadow: 0 0 10px rgba(0, 112, 243, 0.2);
         }
 
-        /* NAV DISCRÈTE */
+        /* NAVIGATION DISCRÈTE EN HAUT À DROITE */
         nav {
             position: fixed;
             top: 40px;
@@ -116,7 +125,9 @@
             letter-spacing: 1px;
             transition: 0.3s;
         }
-        nav a:hover { color: #fff; }
+        nav a:hover {
+            color: #fff;
+        }
 
     </style>
 </head>
@@ -125,23 +136,24 @@
     <div id="particles-js"></div>
 
     <nav>
-        <a href="#about">A PROPOS</a>
-        <a href="#projects">PROJETS</a>
-        <a href="#contact">CONTACT</a>
+        <a href="#about">// PROFIL</a>
+        <a href="#parcours">// PARCOURS</a>
+        <a href="#contact">// CONTACT</a>
     </nav>
 
-    <main class="content">
-        <h1 class="name">Rukiye<br>SAATCI</h1>
+    <main class="content-left">
+        <h1 class="hero-name">Rukiye<br>SAATCI</h1>
         
         <div class="profession-container">
             <span>Ambition :</span>
             <span class="typing-text">Experte en Cybersécurité</span>
         </div>
 
-        <div class="skills">
+        <div class="skills-group">
             <div class="badge">BTS SIO SISR</div>
             <div class="badge">CISCO RÉSEAUX</div>
-            <div class="badge">LINUX / DEBIAN</div>
+            <div class="badge
+            ">LINUX / DEBIAN</div>
             <div class="badge">WINDOWS SERVER</div>
             <div class="badge">AUDIT DE SÉCURITÉ</div>
         </div>
@@ -152,7 +164,7 @@
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#0070f3" },
+                "color": { "value": "#0070f3" }, /* Couleur des particules en bleu */
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.2, "random": false },
                 "size": { "value": 2, "random": true },
@@ -161,7 +173,8 @@
             },
             "interactivity": {
                 "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" } }
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
             },
             "retina_detect": true
         });
