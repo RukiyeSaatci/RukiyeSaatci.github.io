@@ -8,12 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* CONFIGURATION DES COULEURS (Variables) */
+        /* CONFIGURATION DES VARIABLES */
         :root {
             --bg: #000000;
             --text: #ffffff;
-            --neon: #ffffff;
-            --accent: #00ff41; /* Vert Matrix pour les détails */
+            --neon: #ffffff; /* Blanc Néon */
+            --accent: #00ff41; /* Vert Matrix pour les détails techniques */
             --glass: rgba(255, 255, 255, 0.05);
         }
 
@@ -25,21 +25,32 @@
             --glass: rgba(0, 0, 0, 0.05);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.3s ease; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.4s, color 0.4s; }
+        
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            font-family: 'Inter', sans-serif; 
+            overflow-x: hidden; 
+        }
 
         /* ANIMATION MATRIX DISCRÈTE */
-        #canvas-matrix { position: fixed; top: 0; left: 0; z-index: 1; opacity: 0.2; }
+        #canvas-matrix { 
+            position: fixed; 
+            top: 0; left: 0; 
+            z-index: 1; 
+            opacity: 0.15; 
+        }
 
         /* BARRE DE CONTRÔLE (LANGUE & THÈME) */
         .controls {
             position: fixed; top: 30px; right: 50px; z-index: 100;
-            display: flex; gap: 20px; font-family: 'Fira Code', monospace; font-size: 0.7rem;
+            display: flex; gap: 15px; font-family: 'Fira Code', monospace;
         }
         .btn-toggle { 
-            cursor: pointer; padding: 5px 12px; border: 1px solid var(--text); 
+            cursor: pointer; padding: 6px 14px; border: 1px solid var(--text); 
             border-radius: 4px; background: transparent; color: var(--text);
-            text-transform: uppercase; letter-spacing: 1px;
+            font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px;
         }
         .btn-toggle:hover { background: var(--text); color: var(--bg); }
 
@@ -50,36 +61,49 @@
         }
 
         .hero h1 {
-            font-size: 5.5rem; font-weight: 900; line-height: 0.85; letter-spacing: -4px;
+            font-size: clamp(3.5rem, 10vw, 6rem); 
+            font-weight: 900; line-height: 0.85; letter-spacing: -4px;
             margin-bottom: 20px; color: var(--text);
-            text-shadow: 0 0 15px var(--neon), 0 0 30px var(--neon);
+            text-shadow: 0 0 15px var(--neon);
         }
 
+        .hero h1 span { text-transform: uppercase; }
+
         .description {
-            font-size: 1.2rem; max-width: 600px; color: var(--text);
+            font-size: 1.1rem; max-width: 600px; color: var(--text);
             border-left: 3px solid var(--accent); padding-left: 20px; margin-bottom: 40px;
+            line-height: 1.6;
         }
 
         /* ACTIONS */
         .actions { display: flex; gap: 20px; }
         .btn-action {
-            padding: 12px 25px; border-radius: 5px; font-weight: bold; text-decoration: none;
+            padding: 12px 28px; border-radius: 5px; font-weight: bold; text-decoration: none;
             font-size: 0.9rem; border: 1px solid var(--accent); color: var(--accent);
+            background: transparent;
         }
         .btn-action.primary { background: var(--accent); color: var(--bg); }
         .btn-action:hover { box-shadow: 0 0 15px var(--accent); transform: translateY(-2px); }
 
         /* SECTION OBJECTIFS (AU SCROLL) */
         .content-section {
-            padding: 100px 10%; position: relative; z-index: 10; background: var(--bg);
+            padding: 80px 10%; position: relative; z-index: 10; background: var(--bg);
+            border-top: 1px solid var(--glass);
         }
-        .title-sec { color: var(--accent); font-family: 'Fira Code', monospace; margin-bottom: 30px; }
-        .grid-goals { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .title-sec { color: var(--accent); font-family: 'Fira Code', monospace; margin-bottom: 40px; font-size: 1.2rem; }
+        
+        .grid-goals { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+        }
         .goal-card {
             background: var(--glass); padding: 30px; border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid var(--glass);
         }
-        .goal-card h3 { margin-bottom: 15px; color: var(--accent); }
+        .goal-card h3 { margin-bottom: 15px; font-size: 1.1rem; color: var(--text); }
+        .goal-card p { font-size: 0.9rem; color: var(--text); opacity: 0.8; line-height: 1.5; }
+
     </style>
 </head>
 <body>
@@ -101,7 +125,7 @@
 
         <div class="actions">
             <a href="#" class="btn-action primary" id="btn-cv">Mon CV</a>
-            <a href="mailto:votre-email@exemple.com" class="btn-action" id="btn-contact">Me contacter</a>
+            <a href="mailto:ton-email@exemple.com" class="btn-action" id="btn-contact">Me contacter</a>
         </div>
     </main>
 
@@ -109,42 +133,42 @@
         <h2 class="title-sec" id="goals-title">// Objectifs 2026 (Validation SISR)</h2>
         <div class="grid-goals">
             <div class="goal-card">
-                <h3 id="g1-t">Réseaux & Cisco</h3>
-                <p id="g1-d">Maîtrise de la configuration Cisco CLI, routage et commutation sécurisée.</p>
+                <h3 id="g1-t">Infrastructures Réseaux</h3>
+                <p id="g1-d">Maîtrise des environnements Cisco CLI, du routage et de la commutation sécurisée.</p>
             </div>
             <div class="goal-card">
-                <h3 id="g2-t">Systèmes & AD</h3>
-                <p id="g2-d">Administration Windows Server, gestion des GPO et Active Directory.</p>
+                <h3 id="g2-t">Administration Systèmes</h3>
+                <p id="g2-d">Gestion avancée de Windows Server, Active Directory et déploiement de GPO.</p>
             </div>
             <div class="goal-card">
-                <h3 id="g3-t">Défense Cyber</h3>
-                <p id="g3-d">Mise en place de pare-feu et durcissement des systèmes Linux/Debian.</p>
+                <h3 id="g3-t">Sécurité & Hardening</h3>
+                <p id="g3-d">Durcissement des systèmes Linux/Debian et mise en place de politiques de pare-feu.</p>
             </div>
         </div>
     </section>
 
     <script>
-        // --- CHANGER DE THÈME ---
+        // --- GESTION DU THÈME ---
         function toggleTheme() {
             document.body.classList.toggle('light-mode');
         }
 
-        // --- GÉRER LES LANGUES ---
+        // --- GESTION DES LANGUES ---
         let currentLang = 'fr';
         const content = {
             fr: {
                 desc: "Actuellement étudiante en BTS SIO option SISR au CNED. Je forge mes compétences pour devenir une <strong>Experte en Cybersécurité</strong> à l'échelle internationale.",
                 cv: "Mon CV", contact: "Me contacter", goals: "// Objectifs 2026 (Validation SISR)",
-                g1t: "Réseaux & Cisco", g1d: "Maîtrise de la configuration Cisco CLI, routage et commutation sécurisée.",
-                g2t: "Systèmes & AD", g2d: "Administration Windows Server, gestion des GPO et Active Directory.",
-                g3t: "Défense Cyber", g3d: "Mise en place de pare-feu et durcissement des systèmes Linux/Debian."
+                g1t: "Infrastructures Réseaux", g1d: "Maîtrise des environnements Cisco CLI, du routage et de la commutation sécurisée.",
+                g2t: "Administration Systèmes", g2d: "Gestion avancée de Windows Server, Active Directory et déploiement de GPO.",
+                g3t: "Sécurité & Hardening", g3d: "Durcissement des systèmes Linux/Debian et mise en place de politiques de pare-feu."
             },
             en: {
-                desc: "Currently a BTS SIO SISR student at CNED. I am building my skills to become a <strong>Cybersecurity Expert</strong> on an international scale.",
+                desc: "Currently a BTS SIO SISR student at CNED. I am building my skills to become an <strong>International Cybersecurity Expert</strong>.",
                 cv: "Download CV", contact: "Contact Me", goals: "// 2026 Objectives (SISR Validation)",
-                g1t: "Network & Cisco", g1d: "Mastering Cisco CLI configuration, routing, and secure switching.",
-                g2t: "Systems & AD", g2d: "Windows Server administration, GPO management, and Active Directory.",
-                g3t: "Cyber Defense", g3d: "Firewall implementation and hardening of Linux/Debian systems."
+                g1t: "Network Infrastructures", g1d: "Mastering Cisco CLI environments, routing, and secure switching.",
+                g2t: "System Administration", g2d: "Advanced Windows Server management, Active Directory, and GPO deployment.",
+                g3t: "Security & Hardening", g3d: "Hardening Linux/Debian systems and implementing firewall policies."
             }
         };
 
@@ -182,6 +206,7 @@
             }
         }
         setInterval(draw, 40);
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
     </script>
 </body>
 </html>
