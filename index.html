@@ -3,91 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | Rukiye SAATCI</title>
+    <title>Rukiye SAATCI | Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
-        /* CONFIGURATION GLOBALE */
         :root {
-            --neon: #00ff41; /* Vert Matrix */
-            --bg-deep: #050505; /* Noir profond */
-            --bg-panel: rgba(20, 20, 22, 0.7); /* Fond translucide */
-            --text-main: #f0f0f0;
-            --text-muted: #888;
-            --border: rgba(255, 255, 255, 0.08);
+            --cyber-blue: #0070f3; /* Le bleu de Mathieu */
+            --bg-dark: #000000;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --border: rgba(255, 255, 255, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background-color: var(--bg-deep);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
             height: 100vh;
         }
 
-        /* GESTION DU FOND ANIMÉ (PARTICLES) */
+        /* FOND ANIMÉ */
         #particles-js {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: -1; /* Derrière le contenu */
+            z-index: 1;
         }
 
-        /* NAVIGATION EXCLUSIVE (STYLE MATHIEU L.) */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 30px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px); /* Effet verre dépoli */
-            border-bottom: 1px solid var(--border);
-            z-index: 100;
-        }
-        .logo { font-weight: 800; letter-spacing: 2px; color: #fff; font-size: 1.1rem; }
-        .logo span { color: var(--neon); }
-        .nav-links a { color: var(--text-muted); text-decoration: none; margin-left: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; font-family: monospace; transition: 0.3s; }
-        .nav-links a:hover { color: var(--neon); text-shadow: 0 0 10px var(--neon); }
-
-        /* MAIN CONTENT - CENTRÉ (Z-INDEX SUPERIEUR) */
-        .container {
+        /* CONTENU PRINCIPAL */
+        .content {
             position: relative;
             z-index: 10;
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            height: 100vh;
-            padding: 0 10%;
-            text-align: center;
+            padding-left: 10%;
         }
 
-        /* HERO SECTION */
-        .cyber-intro { font-family: 'Courier Prime', monospace; color: var(--neon); font-size: 1rem; letter-spacing: 2px; margin-bottom: 20px; text-shadow: 0 0 10px var(--neon); }
-        h1 { font-size: 4rem; font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 15px; }
-        .ambition { color: #888; font-size: 1.2rem; margin-bottom: 40px; font-weight: 300; max-width: 600px; }
-        .ambition strong { color: var(--text-main); font-weight: 400; }
+        /* TEXTE À GAUCHE STYLE MATHIEU */
+        .name {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: -2px;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
 
-        /* BADGES DE COMPÉTENCES (STYLE MATHIEU L.) */
-        .skills-container { margin-top: 30px; }
-        .skills-container h3 { font-size: 0.8rem; color: #555; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
-        .badges-group { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+        .profession-container {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* ANIMATION TEXTE EXPERTE CYBER */
+        .typing-text {
+            color: var(--cyber-blue);
+            border-right: 2px solid var(--cyber-blue);
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: typing 3s steps(30, end) forwards, blink 0.8s infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink {
+            from { border-color: transparent }
+            to { border-color: var(--cyber-blue) }
+        }
+
+        /* BADGES COMPÉTENCES EN BAS */
+        .skills {
+            margin-top: 50px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
         .badge {
-            background: rgba(0, 255, 65, 0.05);
-            border: 1px solid rgba(0, 255, 65, 0.2);
-            color: var(--neon);
-            padding: 6px 15px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-family: monospace;
-            letter-spacing: 1px;
+            background: rgba(0, 112, 243, 0.1);
+            border: 1px solid rgba(0, 112, 243, 0.3);
+            color: var(--cyber-blue);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'Fira Code', monospace;
             text-transform: uppercase;
+        }
+
+        /* NAV DISCRÈTE */
+        nav {
+            position: fixed;
+            top: 40px;
+            right: 60px;
+            z-index: 100;
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
             transition: 0.3s;
         }
-        .badge:hover { background: rgba(0, 255, 65, 0.1); border-color: var(--neon); box-shadow: 0 0 10px rgba(0, 255, 65, 0.2); }
+        nav a:hover { color: #fff; }
 
     </style>
 </head>
@@ -96,49 +125,45 @@
     <div id="particles-js"></div>
 
     <nav>
-        <div class="logo">R.<span>SAATCI</span></div>
-        <div class="nav-links">
-            <a href="#about">// PROFIL</a>
-            <a href="#projects">// PROJETS</a>
-            <a href="#contact">// CONTACT</a>
-        </div>
+        <a href="#about">A PROPOS</a>
+        <a href="#projects">PROJETS</a>
+        <a href="#contact">CONTACT</a>
     </nav>
 
-    <div class="container">
-        <p class="cyber-intro">>_ root@rukiye_saatci:~</p>
-        <h1>Rukiye<br>SAATCI</h1>
-        <p class="ambition">Actuellement en BTS SIO (SISR) au CNED. Ambition professionnelle : <strong>Experte en Cybersécurité</strong>.</p>
-
-        <div class="skills-container">
-            <h3>OBJECTIFS SISR 2026 // En cours d'acquisition</h3>
-            <div class="badges-group">
-                <div class="badge">CISCO CLI</div>
-                <div class="badge">LINUX DEBIAN</div>
-                <div class="badge">WINDOWS SERVER</div>
-                <div class="badge">CYBERSÉCURITÉ</div>
-                <div class="badge">AUDIT DE SÉCURITÉ</div>
-            </div>
+    <main class="content">
+        <h1 class="name">Rukiye<br>SAATCI</h1>
+        
+        <div class="profession-container">
+            <span>Ambition :</span>
+            <span class="typing-text">Experte en Cybersécurité</span>
         </div>
-    </div>
+
+        <div class="skills">
+            <div class="badge">BTS SIO SISR</div>
+            <div class="badge">CISCO RÉSEAUX</div>
+            <div class="badge">LINUX / DEBIAN</div>
+            <div class="badge">WINDOWS SERVER</div>
+            <div class="badge">AUDIT DE SÉCURITÉ</div>
+        </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#00ff41" }, /* Couleur des particules */
+                "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#0070f3" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": false },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#00ff41", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+                "opacity": { "value": 0.2, "random": false },
+                "size": { "value": 2, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#0070f3", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
             },
             "interactivity": {
                 "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
-                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
-            }
+                "events": { "onhover": { "enable": true, "mode": "grab" } }
+            },
+            "retina_detect": true
         });
     </script>
 </body>
